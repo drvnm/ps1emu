@@ -7,19 +7,31 @@ CPU::CPU(MemoryMapper memoryMapper) : memoryMapper(memoryMapper)
 
 void CPU::reset()
 {
-    regs.reset();
+    registers.reset();
+    setup_opcodes();
 }
 
-void CPU::run_current_instruction() 
+void CPU::run_current_instruction()
 {
-    uint32_t instruction = load32(regs.pc);
-    regs.pc += 4;
+    uint32_t instruction = load32(registers.pc);
+    registers.pc += 4;
     decode_and_execute(instruction);
 }
 
 void CPU::decode_and_execute(uint32_t instruction)
 {
-    throw std::runtime_error(std::string("Unimplemented instruction: ") + std::to_string(instruction));
+    Instruction instr = Instruction(instruction);
+    currentInstruction = instr;
+    uint8_t opcode = instr.get_opcode();
+    if (opcodes[opcode] != nullptr)
+    {
+        (this->*opcodes[opcode])(instr);
+    }
+    else
+    {
+
+        throw std::runtime_error(std::string("Unimplemented instruction: ") + std::to_string(instruction));
+    }
 }
 
 uint32_t CPU::load32(uint32_t address) const
@@ -27,10 +39,7 @@ uint32_t CPU::load32(uint32_t address) const
     return memoryMapper.read32(address);
 }
 
-void CPU::run()
+void CPU::step()
 {
-    while (true)
-    {
-        run_current_instruction();
-    }
+    run_current_instruction();
 }
