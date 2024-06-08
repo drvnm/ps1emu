@@ -11,17 +11,19 @@ void CPU::reset()
     setup_opcodes();
 }
 
+// this is written a bit weird but it basically
+// exececutes the instruction fetched from the previous step
+// and fetches the next instruction. if the instruction changes the pc it will still execute the next instruction
 void CPU::run_current_instruction()
 {
-    uint32_t instruction = load32(registers.pc);
+    Instruction instruction = next_instruction;
+    next_instruction = Instruction(load32(registers.pc));
     registers.pc += 4;
     decode_and_execute(instruction);
 }
 
-void CPU::decode_and_execute(uint32_t instruction)
+void CPU::decode_and_execute(Instruction instr)
 {
-    Instruction instr = Instruction(instruction);
-    currentInstruction = instr;
     uint8_t opcode = instr.get_opcode();
     if (opcodes[opcode] != nullptr)
     {
@@ -30,9 +32,10 @@ void CPU::decode_and_execute(uint32_t instruction)
     else
     {
 
-        throw std::runtime_error(std::string("Unimplemented instruction: ") + std::to_string(instruction));
+        VENU_LOG_CRITICAL(std::string("Unimplemented instruction: ") + std::to_string(instr.get_opcode()));
     }
 }
+
 
 uint32_t CPU::load32(uint32_t address) const
 {

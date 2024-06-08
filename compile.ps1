@@ -1,4 +1,4 @@
-C:\Users\venum\Downloads\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe -std=c++17 main.cpp  `
+C:\Users\venum\Downloads\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe -std=c++2a main.cpp  `
 bios/bios.cpp `
 common/defs.cpp `
 cpu/cpu.cpp `
@@ -17,6 +17,7 @@ imgui/imgui_impl_sdlrenderer2.cpp `
 imgui/imgui_tables.cpp `
 -I"./include/SDL2" `
 -I"./include/imgui" `
+-I"./include/fmt" `
 -L"./lib" -Wall -lmingw32 `
 -L"./imgui" `
 -lSDL2main -lSDL2 `

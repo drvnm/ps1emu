@@ -8,7 +8,7 @@ Bios::Bios(const char *path)
     std::ifstream file(path);
     if (!file.is_open())
     {
-        throw std::runtime_error("Failed to open BIOS file");
+        VENU_LOG_CRITICAL("Failed to open BIOS file");
     }
 
     file.seekg(0, std::ios::end);
@@ -21,7 +21,7 @@ Bios::Bios(const char *path)
 
     if (data.size() != BIOS_SIZE)
     {
-        throw std::runtime_error("Invalid BIOS size");
+        VENU_LOG_CRITICAL("BIOS file is not the correct size");
     }
     VENU_LOG_SUCCESS("BIOS loaded successfully");
 }
@@ -31,7 +31,7 @@ uint32_t Bios::read32(uint32_t offset) const
 
     if (offset >= data.size())
     {
-        throw std::runtime_error("BIOS read out of bounds");
+        VENU_LOG_CRITICAL("BIOS read out of bounds");
     }
 
     uint8_t byte0 = data[offset + 0];

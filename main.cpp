@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
             debugger.do_step = true;
         }
         ImGui::SameLine();
-        if(ImGui::Button("Step Mode"))
+        if(ImGui::Button("Step Mode")) 
         {
             debugger.step_mode = !debugger.step_mode;
         }
@@ -69,7 +69,7 @@ int main(int argc, char* argv[])
         
         ImGui::Spacing();
         // CURRENT INSTUCTION BEING EXECUTED
-        ImGui::Text("Instruction: %s", get_formatted_instruction(cpu.currentInstruction).c_str());
+        ImGui::Text("instruction: %s", get_formatted_instruction(cpu.next_instruction).c_str());
 
         // Registers in the same window (COLLAPSABLE)
         // some white space
@@ -142,7 +142,7 @@ int main(int argc, char* argv[])
         SDL_RenderPresent(renderer);
 
 
-        if (debugger.step_mode && debugger.do_step)
+        if (debugger.do_step || !debugger.step_mode)
         {
             cpu.step();
             debugger.do_step = false;
