@@ -49,3 +49,9 @@ uint32_t Instruction::get_jump_address() const
 {
     return instruction & 0x3FFFFFF;
 }
+
+std::string Instruction::to_string() const
+{
+    return fmt::format("Raw: {:08x}, Opcode: {:02x}, RS: {:02x}, RT: {:02x}, RD: {:02x}, IMM: {:04x}, SE_IMM: {:04x}, SHIFT_IMM: {:02x}, SUB_OPCODE: {:02x}, JUMP_ADDRESS: {:08x}",
+                       instruction, get_opcode(), get_rs(), get_rt(), get_rd(), get_imm(), get_se_imm(), get_shift_imm(), get_sub_opcode(), get_jump_address());
+}

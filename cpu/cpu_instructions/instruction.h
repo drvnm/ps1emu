@@ -29,4 +29,7 @@ public:
     uint32_t get_sub_opcode() const;
     // get jump address (bits 0-25)
     uint32_t get_jump_address() const;
+
+    // pretty print the instruction
+    std::string to_string() const;
 };

@@ -7,6 +7,7 @@ cpu/cpu_instructions/instruction.cpp `
 cpu/cpu_instructions/loads.cpp `
 cpu/cpu_instructions/setup_opcodes.cpp `
 cpu/cpu_instructions/alu.cpp `
+cpu/cpu_instructions/cop.cpp `
 memorymapper/memorymapper.cpp `
 imgui/imgui.cpp `
 imgui/imgui_demo.cpp `
@@ -15,6 +16,7 @@ imgui/imgui_widgets.cpp `
 imgui/imgui_impl_sdl2.cpp `
 imgui/imgui_impl_sdlrenderer2.cpp `
 imgui/imgui_tables.cpp `
+ram/ram.cpp `
 -I"./include/SDL2" `
 -I"./include/imgui" `
 -I"./include/fmt" `
